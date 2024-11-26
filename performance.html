@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Output</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-container {
+            margin: 20px 0;
+        }
+        .json-container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            width: 80%;
+            overflow-x: auto;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Combined Output</h1>
+        <div class="image-container">
+            <h2>Figure 1</h2>
+            <img src="./strategy1/equity_curve.png" alt="Figure 1">
+        </div>
+        <div class="image-container">
+            <h2>Figure 2</h2>
+            <img src="./strategy1/return_curve.png" alt="Figure 2">
+        </div>
+        <div class="json-container">
+            <h2>JSON Data</h2>
+            <pre id="json-data"></pre>
+        </div>
+    </div>
+    <script>
+        fetch('./strategy1/output.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('json-data').textContent = JSON.stringify(data, null, 4);
+            })
+            .catch(error => console.error('Error loading JSON:', error));
+    </script>
+</body>
+</html>
